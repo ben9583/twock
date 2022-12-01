@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center"><img width="911" alt="Twock" src="https://user-images.githubusercontent.com/16968917/205165074-93f58a12-3965-4cc4-b071-b6ac02be6a83.png" /></p>
 
-## Getting Started
+<p align="center"><i>A tool for viewing Twitter's opinions on stocks</i></p>
 
-First, run the development server:
+# About
 
-```bash
-npm run dev
-# or
-yarn dev
+Twock is a tool and website that pulls data from Twitter about a stock and displays tweets about it. These can be used by the user for sentiment analysis in their own application.
+
+Twock is currently not being hosted as it is still in development, but will be available for public use at [twock.xyz](https://twock.xyz/).
+
+This project is part of an assignment for CSE412 (Database Management) for the fa22 semester.
+
+## Disclaimer
+
+Twock is a project that fetches tweets from a user-inputted stock ticker symbol, however Twock is not responsible for and does not endorse the content of the tweets. The user is advised that inappropriate tweets may appear as part of their query.
+
+# Development
+
+Thank you for being interested in making Twock better! Below are instructions for getting started on development, building your own instance of Twock, and contributing to the main project.
+
+## Setup
+
+[NodeJS v18+](https://nodejs.org/download/release/latest-v18.x/) is required to build and develop this project as a prerequisite. Please make sure you have a working version and `npm` installed.
+
+You will need to also have an instance of [PostgreSQL](https://www.postgresql.org/) running at `localhost:5432`.
+
+First, clone the project and navigate to the project root directory.
+```sh
+git clone --recursive https://github.com/harshavb/twock.git twock
+cd twock
+```
+
+Next, install the required packages for Twock. This project uses the [React](https://reactjs.org/) framework [NextJS](https://nextjs.org/) for development. You are free to use an alternative package manager like `yarn` or `pnpm`, but by default we use `npm`.
+```sh
+npm i
+```
+
+## Building
+
+You can run a webpack development server for live updates while developing using `start`:
+```sh
+npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+When you're ready to build, use the `build` script to get a production-optimized output.
+```sh
+npm run build
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Contributing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+If you would like to submit an issue, there isn't a required format, but when in doubt, include as much information you think may be relevant as possible. When reporting a bug, include a description of the issue, the expected behavior, and steps to reproduce the bug; it may also be helpful to include relevant crash logs or console errors if applicable. To request a feature, include a detailed description of what you'd like to see added to Twock. Feature requests are a discussion, so please be available to respond to questions and concerns in the comments.
 
-## Learn More
+If you're looking for an issue to resolve, check out the [issues](https://github.com/harshavb/twock/issues) page for problems needing resolution. Feel free to run any ideas in the comments and more experienced developers can give you guidance on how to continue.
 
-To learn more about Next.js, take a look at the following resources:
+When you're ready to submit a pull request, please explain all of the changes you've made as well as any relevant issues the changes address. You may be asked to revise some of your modifications, so please be active in discussion if it arises.
+
+# Resources
+
+To learn more about the tools we use to develop the project, take a look at the following links:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [React Homepage](https://reactjs.org) - learn about web development with React.
+- [PostgreSQL](https://postgresql.org) - our backend, relational database.
+- [node-postgres Documentation](https://node-postgres.com/) - documentation for our PostgreSQL interface through Node.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Warranty Information
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
