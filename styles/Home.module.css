@@ -3,7 +3,7 @@
 }
 
 .main {
-  min-height: 100vh;
+  min-height: 87vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
@@ -14,6 +14,7 @@
 
 .footer {
   display: flex;
+  min-height: 13vh;
   flex: 1;
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
@@ -126,4 +127,32 @@
   .logo img {
     filter: invert(1);
   }
+}
+
+/* added by CSE 412 Team */
+.symbolInput {
+  width: 20rem;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  display: inline-block;
+  border-style: solid;
+  border-color: white;
+  background-color: black;
+  text-transform: uppercase;
+}
+
+.symbolInput:focus {
+  outline:none;
+}
+
+.goButton {
+  width: 5rem;
+  height: 3rem;
+  font-size: 2rem;
+  margin-left: 2rem;
+  display: inline-block;
+  border-style: solid;
+  border-color: white;
+  background-color: black;
 }
