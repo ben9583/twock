@@ -9,7 +9,6 @@ const stocks = require('stock-ticker-symbol')
 export default function Home() {
   let [ symbol, setSymbol ] = useState("")
   let [ errored, setErrored ] = useState("hidden")
-  console.log(symbol)
 
   function goButtonPress() {
     if (stocks.lookup(symbol) == null)
