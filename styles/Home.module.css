@@ -154,5 +154,13 @@
   display: inline-block;
   border-style: solid;
   border-color: white;
-  background-color: black;
+  background-color: green;
+}
+
+.goButton:hover {
+  background-color: #009F00;
+}
+
+.goButton:active {
+  background-color: green;
 }

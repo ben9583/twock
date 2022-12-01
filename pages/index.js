@@ -1,11 +1,26 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {useState} from 'react'
+import { useState } from 'react'
+import Router from 'next/router'
+
+const stocks = require('stock-ticker-symbol')
 
 export default function Home() {
-  let [symbol, setSymbol] = useState("");
-  console.log(symbol);
+  let [ symbol, setSymbol ] = useState("")
+  let [ errored, setErrored ] = useState("hidden")
+  console.log(symbol)
+
+  function goButtonPress() {
+    if (stocks.lookup(symbol) == null)
+    {
+      setErrored("visible")
+    }
+    else {
+      Router.push("/" + symbol.toUpperCase())
+    }
+  }
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -16,15 +31,25 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 style={{fontSize: "15rem", marginBottom: "1rem", marginTop: "-8rem"}}>Twock</h1>
-        {/*<h1>Enter your stock symbol.</h1>*/}
         <div>
           <input
             className={styles.symbolInput}
-            onChange={(e) => setSymbol(e.target.value)} 
+            onChange={(e) => setSymbol(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                goButtonPress()
+              }
+            }}
             placeholder="Enter symbol here"
           />
-          <button className={styles.goButton}>Go!</button>
+          <button 
+            className={styles.goButton}
+            onClick={goButtonPress}
+          >
+            Go!
+          </button>
         </div>
+        <h1 style={{color: "red", visibility: errored}}>Invalid stock symbol!</h1>
       </main>
 
       <footer className={styles.footer}>
