@@ -3,6 +3,9 @@
 }
 
 .main {
+  width: 80vw;
+  max-width: 800px;
+  margin: auto;
   min-height: 87vh;
   padding: 4rem 0;
   flex: 1;
@@ -10,6 +13,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.title {
+  font-size: min(30vw, 20rem);
+  margin-bottom: 1rem;
+  margin-top: -8rem;
 }
 
 .footer {
@@ -131,8 +140,10 @@
 
 /* added by CSE 412 Team */
 .symbolInput {
-  width: 20rem;
-  height: 3rem;
+  width: 70vw;
+  max-width: 20rem;
+  height: 10vw;
+  max-height: 2.75rem;
   font-size: 2rem;
   text-align: center;
   display: inline-block;
@@ -147,13 +158,17 @@
 }
 
 .goButton {
-  width: 5rem;
-  height: 3rem;
-  font-size: 2rem;
+  width: 20vw;
+  max-width: 5rem;
+  height: 10vw;
+  max-height: 2.75rem;
+  font-size: min(7vw, 1.75rem);
   margin-left: 2rem;
+  padding: 0;
   display: inline-block;
   border-style: solid;
   border-color: white;
+  color: white;
   background-color: green;
 }
 
@@ -163,4 +178,38 @@
 
 .goButton:active {
   background-color: green;
+}
+
+.statusMessage {
+  color: red;
+  font-size: min(7vw, 1.75rem);
+}
+
+@media screen and (max-width: 600px) {
+  .symbolInput {
+    display: block;
+  }
+
+  .goButton {
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .footer {
+    padding: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
 }
