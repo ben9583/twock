@@ -27,20 +27,25 @@ a {
 
 ::placeholder {
   text-transform: initial;
+  font-size: min(6vw, 1.7rem);
 }
 
 ::-webkit-input-placeholder {
   text-transform: initial;
+  font-size: min(6vw, 1.7rem);
 }
 
 :-moz-placeholder { 
   text-transform: initial;
+  font-size: min(6vw, 1.7rem);
 }
 
 ::-moz-placeholder {  
   text-transform: initial;
+  font-size: min(6vw, 1.7rem);
 }
 
 :-ms-input-placeholder { 
   text-transform: initial;
+  font-size: min(6vw, 1.7rem);
 }

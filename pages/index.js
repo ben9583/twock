@@ -29,8 +29,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 style={{fontSize: "15rem", marginBottom: "1rem", marginTop: "-8rem"}}>Twock</h1>
-        <div>
+        <h1 className={styles.title}>Twock</h1>
+        <div style={{verticalAlign: "top"}}>
           <input
             className={styles.symbolInput}
             onChange={(e) => setSymbol(e.target.value)}
@@ -48,17 +48,11 @@ export default function Home() {
             Go!
           </button>
         </div>
-        <h1 style={{color: "red", visibility: errored}}>Invalid stock symbol!</h1>
+        <h1 className={styles.statusMessage} style={{visibility: errored}}>Invalid stock symbol!</h1>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by CSE 412
-        </a>
+        <p>Powered by CSE 412</p>
       </footer>
     </div>
   )
