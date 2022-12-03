@@ -3,11 +3,20 @@ import { getOAuth2Token, searchTweets } from '../lib/twitter'
 import styles from '../styles/Stock.module.css'
 import Image from 'next/image'
 
+const stocks = require('stock-ticker-symbol')
 const { Client } = require('pg')
 
 let token = ''
 
 export async function getServerSideProps(context) {
+    if (stocks.lookup(context.params.stock) == null) {
+        return {
+            props: {
+                success: false,
+            }
+        }
+    }
+
     require('dotenv').config()
     const client = new Client()
      
