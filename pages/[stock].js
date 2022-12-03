@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
+import { getOAuth2Token, searchTweets } from './utils/twitter'
 
 const { Client } = require('pg')
+
+let token = ''
 
 export async function getServerSideProps(context) {
     require('dotenv').config()
@@ -23,13 +26,38 @@ export async function getServerSideProps(context) {
     console.log(res2.rows[0].message)
     client.end()
 
+    if(token == '') token = await getOAuth2Token()
+    const data = await searchTweets(token, "$" + context.params.stock);
+    if(data.success == false) {
+        if(data.error == 401) {
+            token = await getOAuth2Token()
+            const newData = await searchTweets(token, "$" + context.params.stock);
+
+            if(newData.success == false) {
+                console.log("Error retrieving tweets and refreshing token")
+                return {
+                    props: {
+                        success: false,
+                    }
+                }
+            }
+        } else {
+            console.log("Error retrieving tweets: " + data.error)
+            return {
+                props: {
+                    success: false,
+                }
+            }
+        }
+    }
+
     return {
-        props: {epic: "xd"}, // will be passed to the page component as props
+        props: data
     }
 }
 
 export default function Stock(props) {
-    console.log(props.epic)
+    console.log(props)
     const router = useRouter()
     const { stock } = router.query
 
