@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { getOAuth2Token, searchTweets } from './utils/twitter'
+import { getOAuth2Token, searchTweets } from '../lib/twitter'
 import styles from '../styles/Stock.module.css'
 import Image from 'next/image'
 
