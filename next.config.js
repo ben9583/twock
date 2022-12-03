@@ -6,13 +6,13 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'pbs.twimg.com',
-        port: '',
+        port: '443',
         pathname: '/profile_images/**',
       },
       {
         protocol: 'https',
         hostname: 'abs.twimg.com',
-        port: '',
+        port: '443',
         pathname: '/sticky/default_profile_images/**',
       }
     ],
