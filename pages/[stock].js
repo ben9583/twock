@@ -18,15 +18,6 @@ export async function getServerSideProps(context) {
             console.log('connected')
         }
     })
-    
-    const res1 = await client.query('SELECT $1::text as message', ['Hello world!'])
-    
-    const res2 = await client.query('SELECT i.* FROM twitter_user AS u, tweet_information AS i WHERE u.tu_user_id = i.ti_user_id AND u.tu_username = \'investred\'')
-
-    console.log(res1.rows[0].message)
-    console.log(res2.rows[0])
-    console.log(res2.rows[0].message)
-    client.end()
 
     if(token == '') token = await getOAuth2Token()
     let data = await searchTweets(token, context.params.stock);
@@ -57,11 +48,13 @@ export async function getServerSideProps(context) {
     // Insert data into database
     for(let i = 0; i < Math.min(data.data.length, data.includes.users.length); i++) {
         const res3 = await client.query('INSERT INTO twitter_user (tu_user_id, tu_username, tu_profile_image_url) VALUES ($1, $2, $3) ON CONFLICT (tu_user_id) DO NOTHING', [data.includes.users[i].id, data.includes.users[i].username, data.includes.users[i].profile_image_url])
-        const res4 = await client.query('INSERT INTO tweet_information (ti_tweet_id, ti_user_id, ti_text, ti_unix_timestamp, ti_s_symbol) VALUES ($1, $2, $3, $4, %5) ON CONFLICT (ti_tweet_id) DO NOTHING', [data.data[i].id, data.includes.users[i].id, data.data[i].text, Date.parse(data.data[i].created_at), context.params.stock])
+        const res4 = await client.query('INSERT INTO tweet_information (ti_tweet_id, ti_user_id, ti_text, ti_unix_timestamp, ti_s_symbol) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (ti_tweet_id) DO NOTHING', [data.data[i].id, data.includes.users[i].id, data.data[i].text, Date.parse(data.data[i].created_at), context.params.stock])
 
         console.log(res3)
         console.log(res4)
     }
+
+    client.end()
 
     return {
         props: data
