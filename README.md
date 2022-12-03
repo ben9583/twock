@@ -35,7 +35,15 @@ Next, install the required packages for Twock. This project uses the [React](htt
 npm i
 ```
 
-Lastly, you'll want to configure your PostgreSQL database information in the `.env` folder located in the root of the project. By default, it looks like this:
+Lastly, you'll want to configure your PostgreSQL database information in a `.env` file located in the root of the project. You should see a file called `.env.sample`, which includes a template you can copy to `.env` and update with your information. We have `.env.sample` committed to this project since `.env` is gitignored and should not be shared with others.
+
+Run the following command to give yourself a `.env` file:
+```sh
+cp .env.sample .env
+```
+
+Open `.env` and you should see the following text:
+
 ```
 USER=UPDATEME           # The postgres user
 PGPASSWORD=UPDATEME     # Password for the user
