@@ -29,7 +29,15 @@ async function searchTweets(token, query) {
         },
     })
 
-    const data = await response.json()
+    if(response.status != 200) {
+        return {
+            success: false,
+            error: response.status,
+        }
+    }
+
+    let data = await response.json()
+    data.success = true
     return data
 }
 
