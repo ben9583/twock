@@ -3,11 +3,8 @@ import { useRouter } from 'next/router'
 const { Client } = require('pg')
 
 export async function getServerSideProps(context) {
-    const client = new Client({
-        host: 'localhost',
-        port: 5432,
-        user: 'phoenix'
-    })
+    require('dotenv').config()
+    const client = new Client()
      
     client.connect((err) => {
         if (err) {
