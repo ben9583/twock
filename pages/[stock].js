@@ -80,7 +80,7 @@ export default function Stock(props) {
                     </div>
                     <div className={styles.tweetContent}>
                         <p>{props.data[i].text}</p>
-                        <p>{props.data[i].created_at}</p>
+                        <p>{new Date(Date.parse(props.data[i].created_at)).toLocaleDateString('en-US')} at {new Date(Date.parse(props.data[i].created_at)).toLocaleTimeString('en-US')}</p>
                     </div>
                 </div>
             )
