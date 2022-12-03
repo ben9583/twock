@@ -1,13 +1,22 @@
 import { useRouter } from 'next/router'
-import { getOAuth2Token, searchTweets } from './utils/twitter'
+import { getOAuth2Token, searchTweets } from '../lib/twitter'
 import styles from '../styles/Stock.module.css'
 import Image from 'next/image'
 
+const stocks = require('stock-ticker-symbol')
 const { Client } = require('pg')
 
 let token = ''
 
 export async function getServerSideProps(context) {
+    if (stocks.lookup(context.params.stock) == null) {
+        return {
+            props: {
+                success: false,
+            }
+        }
+    }
+
     require('dotenv').config()
     const client = new Client()
      
@@ -49,9 +58,6 @@ export async function getServerSideProps(context) {
     for(let i = 0; i < Math.min(data.data.length, data.includes.users.length); i++) {
         const res3 = await client.query('INSERT INTO twitter_user (tu_user_id, tu_username, tu_profile_image_url) VALUES ($1, $2, $3) ON CONFLICT (tu_user_id) DO NOTHING', [data.includes.users[i].id, data.includes.users[i].username, data.includes.users[i].profile_image_url])
         const res4 = await client.query('INSERT INTO tweet_information (ti_tweet_id, ti_user_id, ti_text, ti_unix_timestamp, ti_s_symbol) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (ti_tweet_id) DO NOTHING', [data.data[i].id, data.includes.users[i].id, data.data[i].text, Date.parse(data.data[i].created_at), context.params.stock])
-
-        console.log(res3)
-        console.log(res4)
     }
 
     client.end()
@@ -80,7 +86,7 @@ export default function Stock(props) {
                     </div>
                     <div className={styles.tweetContent}>
                         <p>{props.data[i].text}</p>
-                        <p>{props.data[i].created_at}</p>
+                        <p>{new Date(Date.parse(props.data[i].created_at)).toLocaleDateString('en-US')} at {new Date(Date.parse(props.data[i].created_at)).toLocaleTimeString('en-US')}</p>
                     </div>
                 </div>
             )
