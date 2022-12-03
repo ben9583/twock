@@ -35,6 +35,16 @@ Next, install the required packages for Twock. This project uses the [React](htt
 npm i
 ```
 
+Lastly, you'll want to configure your PostgreSQL database information in the `.env` folder located in the root of the project. By default, it looks like this:
+```
+USER=UPDATEME           # The postgres user
+PGPASSWORD=UPDATEME     # Password for the user
+PGDATABASE=twockdb      # Database name
+PGPORT=5432             # Database port (default: 5432)
+```
+
+You'll want to update the `USER` and `PGPASSWORD` information with your Postgres information before continuing. You can either create a database called `twockdb` at port 5432, or change the environment variables to reflect your setup.
+
 ## Building
 
 You can run a webpack development server for live updates while developing using `start`:
