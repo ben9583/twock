@@ -19,7 +19,7 @@ async function getOAuth2Token() {
 }
 
 async function searchTweets(token, query) {
-    const endpoint = `${TWITTER_API_ENDPOINT}/2/tweets/search/recent?query=${query}&user.fields=username,profile_image_url&tweet.fields=text,created_at`
+    const endpoint = `${TWITTER_API_ENDPOINT}/2/tweets/search/recent?query=${query}&tweet.fields=text,created_at&user.fields=username,profile_image_url&expansions=author_id`
 
     console.log(endpoint)
 
