@@ -35,15 +35,26 @@ Next, install the required packages for Twock. This project uses the [React](htt
 npm i
 ```
 
-Lastly, you'll want to configure your PostgreSQL database information in the `.env` folder located in the root of the project. By default, it looks like this:
+Lastly, you'll want to configure your Twitter API and PostgreSQL database information in a `.env` file located in the root of the project. You should see a file called `.env.sample`, which includes a template you can copy to `.env` and update with your information. We have `.env.sample` committed to this project since `.env` is gitignored and should not be shared with others.
+
+Run the following command to give yourself a `.env` file:
+```sh
+cp .env.sample .env
+```
+
+Open `.env` and you should see the following text:
+
 ```
 USER=UPDATEME           # The postgres user
 PGPASSWORD=UPDATEME     # Password for the user
 PGDATABASE=twockdb      # Database name
 PGPORT=5432             # Database port (default: 5432)
+
+TWITTER_KEY=UPDATEME    # Twitter API key
+TWITTER_SECRET=UPDATEME # Twitter API secret
 ```
 
-You'll want to update the `USER` and `PGPASSWORD` information with your Postgres information before continuing. You can either create a database called `twockdb` at port 5432, or change the environment variables to reflect your setup.
+You'll want to update the `USER` and `PGPASSWORD` information with your Postgres information before continuing. You can either create a database called `twockdb` at port 5432, or change the environment variables to reflect your setup. The `TWITTER_KEY` and `TWITTER_SECRET` fields should be the API Key and Secret found in the Twitter developer portal under the section "Consumer Keys".
 
 ## Building
 
