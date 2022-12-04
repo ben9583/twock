@@ -27,29 +27,43 @@ export default async function handler(req, res) {
 
     const data = await client.query('SELECT * FROM tweet_information WHERE ti_tweet_id = $1', [tweet_id])
 
-    client.end()
-
     if (data.rows[0] === undefined) {
         res.status(400).json({ success: false, error: 'No tweet found' })
+        client.end()
         return
     }
 
-    const spawn = require('child_process').spawn;
+    const cache_query = await client.query('SELECT * FROM sentiment WHERE se_tweet_id = $1', [tweet_id])
 
-    const pythonProcess = spawn('python3',["sentiment.py", data.rows[0].ti_text])
-    
-    pythonProcess.stdout.on('data', (text) => {
-        const textNoParens = text.toString().substring(1, text.length - 1)
-        const output = textNoParens.split(',')
-        const sentiment = parseFloat(output[0])
-        const subjectivity = parseFloat(output[1])
-
-        const res_output = {
+    if(cache_query.rows.length > 0) {
+        res.status(200).json({ 
             success: true,
-            sentiment: sentiment,
-            subjectivity: subjectivity
-        }
+            sentiment: cache_query.rows[0].se_sentiment,
+            subjectivity: cache_query.rows[0].se_subjectivity,
+        })
+        client.end()
+        return
+    } else {
+        const spawn = require('child_process').spawn;
+        const pythonProcess = spawn('python3',["sentiment.py", data.rows[0].ti_text])
+        
+        pythonProcess.stdout.on('data', (text) => {
+            const textNoParens = text.toString().substring(1, text.length - 1)
+            const output = textNoParens.split(',')
+            const sentiment = parseFloat(output[0])
+            const subjectivity = parseFloat(output[1])
 
-        res.status(200).json(res_output)
-    })
+            const res_output = {
+                success: true,
+                sentiment: sentiment,
+                subjectivity: subjectivity
+            }
+
+            client.query('INSERT INTO sentiment (se_symbol, se_tweet_id, se_sentiment, se_subjectivity) VALUES ($1, $2, $3, $4) ON CONFLICT (se_symbol, se_tweet_id) DO NOTHING', [data.rows[0].ti_s_symbol, tweet_id, sentiment, subjectivity]).then(() => client.end()).catch(err => {
+                console.error(err)
+                client.end()
+            })
+            res.status(200).json(res_output)
+        })
+    }
 }

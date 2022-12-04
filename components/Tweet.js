@@ -14,8 +14,8 @@ export default function Tweet(props) {
             } else {
                 res.json().then(data => {
                     if(data.success) {
-                        setSentiment(data.sentiment.toFixed(2));
-                        setSubjectivity(data.subjectivity.toFixed(2));
+                        setSentiment(parseFloat(data.sentiment).toFixed(2));
+                        setSubjectivity(parseFloat(data.subjectivity).toFixed(2));
                     } else {
                         setSentiment("error");
                         setSubjectivity("error");
