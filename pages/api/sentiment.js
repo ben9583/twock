@@ -10,8 +10,13 @@ export default async function handler(req, res) {
         return
     }
 
+    if(!Number.isInteger(parseInt(tweet_id))) {
+        res.status(400).json({ success: false, error: 'Invalid tweet id' })
+        return
+    }
+
     const client = new Client()
-        
+
     client.connect((err) => {
         if (err) {
             console.error('connection error', err.stack)
@@ -22,12 +27,9 @@ export default async function handler(req, res) {
         }
     })
 
-    if(!Number.isInteger(parseInt(tweet_id))) {
-        res.status(400).json({ success: false, error: 'Invalid tweet id' })
-        return
-    }
-
     const data = await client.query('SELECT * FROM tweet_information WHERE ti_tweet_id = $1', [tweet_id])
+
+    client.end()
 
     if (data.rows[0] === undefined) {
         res.status(400).json({ success: false, error: 'No tweet found' })
