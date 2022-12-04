@@ -46,7 +46,6 @@ export default function Stock(props) {
         <div style={{width: '100vw', height: '100vh'}}>
             <main className={styles.main}>
                 <button className={styles.refreshButton} onClick={async () => {
-                    console.log("Hello")
                     const res = await fetch(`/api/refresh?stock=${stock}`);
 
                     if(res.status == 200) {
