@@ -22,8 +22,6 @@ export default async function handler(req, res) {
             console.error('connection error', err.stack)
             res.status(500).json({ success: false, error: 'Database connection error' })
             return
-        } else {
-            console.log('connected')
         }
     })
 
