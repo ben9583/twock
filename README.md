@@ -35,7 +35,7 @@ Next, install the required packages for Twock. This project uses the [React](htt
 npm i
 ```
 
-Lastly, you'll want to configure your Twitter API and PostgreSQL database information in a `.env` file located in the root of the project. You should see a file called `.env.sample`, which includes a template you can copy to `.env` and update with your information. We have `.env.sample` committed to this project since `.env` is gitignored and should not be shared with others.
+Next, you'll want to configure your Twitter API and PostgreSQL database information in a `.env` file located in the root of the project. You should see a file called `.env.sample`, which includes a template you can copy to `.env` and update with your information. We have `.env.sample` committed to this project since `.env` is gitignored and should not be shared with others.
 
 Run the following command to give yourself a `.env` file:
 ```sh
@@ -55,6 +55,14 @@ TWITTER_SECRET=UPDATEME # Twitter API secret
 ```
 
 You'll want to update the `USER` and `PGPASSWORD` information with your Postgres information before continuing. You can either create a database called `twockdb` at port 5432, or change the environment variables to reflect your setup. The `TWITTER_KEY` and `TWITTER_SECRET` fields should be the API Key and Secret found in the Twitter developer portal under the section "Consumer Keys".
+
+After this, make sure to get the required NLTK data for sentiment analysis. It can be done by running the python interepreter (typically `python3` or `python`) and entering the following:
+```py
+import nltk
+nltk.download('omw-1.4')
+```
+
+Lastly, you must acquire the python packages in `requirements.txt`, either on your system or in a virtual environment. Notably, for `pattern` to work, you need `mysqlclient`.
 
 ## Building
 
