@@ -62,7 +62,7 @@ import nltk
 nltk.download('omw-1.4')
 ```
 
-Lastly, you must acquire the python packages in `requirements.txt`, either on your system or in a virtual environment.
+Lastly, you must acquire the python packages in `requirements.txt`, either on your system or in a virtual environment. Notably, for `pattern` to work, you need `mysqlclient`.
 
 ## Building
 
