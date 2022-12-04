@@ -1,46 +1,25 @@
 import { useRouter } from 'next/router'
 import { getTweets } from '../lib/refresh'
 import styles from '../styles/Stock.module.css'
-import Image from 'next/image'
 import { useState } from 'react'
+import Tweet from '../components/Tweet'
 
 export async function getServerSideProps(context) {
     return await getTweets(context.params.stock, false)
 }
 
-
-
 export default function Stock(props) {
     const router = useRouter()
     const { stock } = router.query
 
-    const updateTweets = (data) => {
-        let out = []
+    const [data, setData] = useState(props);
 
-        if(data.success) {
-            for(let i = 0; i < Math.min(data.data.length, data.includes.users.length); i++) {
-                out.push(
-                    <div className={styles.tweet} key={data.data[i].id}>
-                        <div className={styles.tweetUser}>
-                            <Image src={data.includes.users[i].profile_image_url} alt="Profile Image" width={50} height={50} />
-                            <div>
-                                <h3 className={styles.tweetUserName}>{data.includes.users[i].name}</h3>
-                                <p className={styles.tweetUserHandle}>@{data.includes.users[i].username}</p>
-                            </div>
-                        </div>
-                        <div className={styles.tweetContent}>
-                            <p>{data.data[i].text}</p>
-                            <p>{new Date(Date.parse(data.data[i].created_at)).toLocaleDateString('en-US')} at {new Date(Date.parse(data.data[i].created_at)).toLocaleTimeString('en-US')}</p>
-                        </div>
-                    </div>
-                )
-            }
-        }
+    const numTweets = Math.min(props.data.length, props.includes.users.length);
 
-        return out;
+    let tweetIdxArr = [];
+    for(let i = 0; i < numTweets; i++) {
+        tweetIdxArr.push(i);
     }
-
-    const [ out, setOut ] = useState(updateTweets(props))
 
     return (
         <div style={{width: '100vw', height: '100vh'}}>
@@ -50,7 +29,7 @@ export default function Stock(props) {
 
                     if(res.status == 200) {
                         const data = await res.json();
-                        setOut(updateTweets(data.props));
+                        setData(data.props);
                     }
                 }}>Update</button>
                 <h1 className={styles.title}>{stock}</h1>
@@ -59,7 +38,9 @@ export default function Stock(props) {
                     <h2 className={styles.subtitle}>Tweets</h2>
                     
                     {
-                        props.success ? out : <div><p>Failed to retrieve tweets</p></div>
+                        data.success ? tweetIdxArr.map((elem) => {
+                            return <Tweet key={data.data[elem].id} data={data.data[elem]} user={data.includes.users[elem]} />
+                        }) : <div><p>Failed to retrieve tweets</p></div>
                     }
                 </div>
             </main>
