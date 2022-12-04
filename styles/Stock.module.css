@@ -28,6 +28,29 @@
     margin: 0;
 }
 
+.refreshButton {
+    margin: auto;
+    display: block;
+    margin-top: 1rem;
+    width: 30vw;
+    max-width: 7rem;
+    height: 10vw;
+    max-height: 2.75rem;
+    font-size: min(7vw, 1.75rem);
+    border-style: solid;
+    border-color: white;
+    color: white;
+    background-color: green;
+}
+
+.refreshButton:hover {
+    background-color: #009F00;
+}
+
+.refreshButton:active {
+    background-color: green;
+}
+
 .tweet {
     border: 1px solid #303030;
     border-radius: 20px;
