@@ -4,6 +4,8 @@ import styles from '../styles/Stock.module.css'
 import { useState } from 'react'
 import Tweet from '../components/Tweet'
 
+// const yahooStockPrices = require('yahoo-stock-prices')
+
 export async function getServerSideProps(context) {
     return await getTweets(context.params.stock, false)
 }
@@ -34,6 +36,7 @@ export default function Stock(props) {
                 }}>Update</button>
                 <h1 className={styles.title}>{stock}</h1>
                 <hr className={styles.line} />
+                {/*<h1 className={styles.subtitle}>The price is {yahooStockPrices.getCurrentPrice(stock).price}</h1> */}
                 <div>
                     <h2 className={styles.subtitle}>Tweets</h2>
                     
