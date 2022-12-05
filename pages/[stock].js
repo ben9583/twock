@@ -42,7 +42,7 @@ export default function Stock(props) {
         setInterval(getSentimentValues, 5000)
     }, []);
 
-    const [numTweets, setNumTweets] = useState(Math.min(props.data.length, props.includes.users.length));
+    const [numTweets, setNumTweets] = useState(props.success ? Math.min(props.data.length, props.includes.users.length) : 0);
 
     let tweetIdxArr = [];
     for(let i = 0; i < numTweets; i++) {
@@ -52,16 +52,20 @@ export default function Stock(props) {
     return (
         <div style={{width: '100vw', height: '100vh'}}>
             <main className={styles.main}>
-                <button className={styles.refreshButton} onClick={async () => {
-                    const res = await fetch(`/api/refresh?stock=${stock}`);
+                {
+                    props.success ? (
+                    <button className={styles.refreshButton} onClick={async () => {
+                        const res = await fetch(`/api/refresh?stock=${stock}`);
 
-                    if(res.status == 200) {
-                        const data = await res.json();
+                        if(res.status == 200) {
+                            const data = await res.json();
 
-                        setNumTweets(Math.min(data.props.data.length, data.props.includes.users.length))
-                        setData(data.props);
-                    }
-                }}>Update</button>
+                            setNumTweets(Math.min(data.props.data.length, data.props.includes.users.length))
+                            setData(data.props);
+                        }
+                    }}>Update</button>
+                    ) : <></>
+                }
                 <h1 className={styles.title}>{stock}</h1>
                 <hr className={styles.line} />
                 <div className={styles.pieChartContainer}>
@@ -85,7 +89,11 @@ export default function Stock(props) {
                                 <h2 style={{fontSize: '2.5rem'}}>Sentiment</h2>
                             </>
                         ) : (
-                            <h2 style={{fontSize: '2.5rem'}}>Loading...</h2>
+                            props.success? (
+                                <h2 style={{fontSize: '2.5rem'}}>Loading...</h2>
+                            ) : (
+                                <h2 style={{fontSize: '2.5rem'}}>No data</h2>
+                            )
                         )
                         }
                     </div>
