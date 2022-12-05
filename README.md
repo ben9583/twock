@@ -56,13 +56,20 @@ TWITTER_SECRET=UPDATEME # Twitter API secret
 
 You'll want to update the `USER` and `PGPASSWORD` information with your Postgres information before continuing. You can either create a database called `twockdb` at port 5432, or change the environment variables to reflect your setup. The `TWITTER_KEY` and `TWITTER_SECRET` fields should be the API Key and Secret found in the Twitter developer portal under the section "Consumer Keys".
 
-After this, make sure to get the required NLTK data for sentiment analysis. It can be done by running the python interepreter (typically `python3` or `python`) and entering the following:
+To use sentiment analysis, you'll need to set up a Python environment and install the necessary packages. First, create a virtual environment and install the packages:
+```sh
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+Once you do this, you'll need to download the sentiment analysis model. You can do this by starting up the python interpreter (by simplying running `python` in your shell) and running the following two lines of code:
 ```py
 import nltk
 nltk.download('omw-1.4')
 ```
 
-Lastly, you must acquire the python packages in `requirements.txt`, either on your system or in a virtual environment. Notably, for `pattern` to work, you need `mysqlclient`.
+You should now be fully set up to run Twock!
 
 ## Building
 
