@@ -1,5 +1,3 @@
-import { getTweets } from "../../lib/refresh";
-
 const { Client } = require('pg')
 
 export default async function handler(req, res) {
