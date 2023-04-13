@@ -4,11 +4,11 @@
 
 # About
 
+_**NOTICE: This project is being discontinued as a result of Twitter's change to make the API paid for all users. However, the code is functional as of January 2023 and with a valid API key should work.**_
+
 Twock is a tool and website that pulls data from Twitter about a stock and displays tweets about it. These can be used by the user for sentiment analysis in their own application.
 
-Twock is currently not being hosted as it is still in development, but will be available for public use at [twock.xyz](https://twock.xyz/).
-
-This project is part of an assignment for CSE412 (Database Management) for the fa22 semester.
+Twock is currently not being hosted due to the pricing changes to Twitter's API, but was formerly present at [twock.xyz](https://twock.xyz/).
 
 ## Disclaimer
 
@@ -26,7 +26,7 @@ You will need to also have an instance of [PostgreSQL](https://www.postgresql.or
 
 First, clone the project and navigate to the project root directory.
 ```sh
-git clone --recursive https://github.com/harshavb/twock.git twock
+git clone --recursive https://github.com/ben9583/twock.git twock
 cd twock
 ```
 
@@ -89,7 +89,7 @@ npm run build
 
 If you would like to submit an issue, there isn't a required format, but when in doubt, include as much information you think may be relevant as possible. When reporting a bug, include a description of the issue, the expected behavior, and steps to reproduce the bug; it may also be helpful to include relevant crash logs or console errors if applicable. To request a feature, include a detailed description of what you'd like to see added to Twock. Feature requests are a discussion, so please be available to respond to questions and concerns in the comments.
 
-If you're looking for an issue to resolve, check out the [issues](https://github.com/harshavb/twock/issues) page for problems needing resolution. Feel free to run any ideas in the comments and more experienced developers can give you guidance on how to continue.
+If you're looking for an issue to resolve, check out the [issues](https://github.com/ben9583/twock/issues) page for problems needing resolution. Feel free to run any ideas in the comments and more experienced developers can give you guidance on how to continue.
 
 When you're ready to submit a pull request, please explain all of the changes you've made as well as any relevant issues the changes address. You may be asked to revise some of your modifications, so please be active in discussion if it arises.
 
